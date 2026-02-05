@@ -44,7 +44,7 @@ int main() {
     }
     reverseArray(nums, n);
     for (int i = 0; i < n; i++) {
-        printf("%d%s", nums[i], (i == n - 1) ? "" : " ");
+        printf("%d ", nums[i]);
     }
     printf("\n");
     
