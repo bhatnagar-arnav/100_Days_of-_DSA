@@ -39,3 +39,58 @@ Input:
 Output:
 7 8 9
 */
+#include<stdio.h>
+#include<stdlib.h>
+int* spiralOrder(int** matrix, int matrixSize, int* matrixColSize, int* returnSize) {
+  *returnSize = matrixSize * (*matrixColSize);
+  int* arr = (int*)malloc((*returnSize) * sizeof(int));
+   int k=0,top=0,left=0,right=*matrixColSize-1,bottom=matrixSize-1;
+   while(top<=bottom && left<=right)
+   {
+    for(int i=left;i<=right;i++)
+      {arr[k++]=matrix[top][i];
+      }top++;
+    for(int i=top;i<=bottom;i++)
+     {arr[k++]=matrix[i][right];
+     }right--;
+    if(top<=bottom)
+    {
+        for(int i=right;i>=left;i--)
+        arr[k++]=matrix[bottom][i];
+          bottom--;          
+    } 
+    if(left<=right)
+    {
+        for(int i=bottom;i>=top;i--)
+     {   arr[k++]=matrix[i][left];
+    }left++;
+    }
+   }
+   return arr;
+}
+
+int main() {
+    int r, c;
+    scanf("%d %d", &r, &c);
+    int** matrix = (int**)malloc(r * sizeof(int*));
+    for(int i = 0; i < r; i++) {
+        matrix[i] = (int*)malloc(c * sizeof(int));
+    }
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+    int returnSize;
+    int* result = spiralOrder(matrix, r, &c, &returnSize);
+    for(int i = 0; i < returnSize; i++) {
+        printf("%d ", result[i]);
+    }
+    free(result);
+    for(int i = 0; i < r; i++) {
+        free(matrix[i]);
+    }
+    free(matrix);
+
+    return 0;
+}
