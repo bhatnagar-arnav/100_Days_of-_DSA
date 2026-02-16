@@ -47,3 +47,38 @@ Input:
 4 5 6
 Output:
 Not a Symmetric Matrix*/
+
+#include <stdio.h>
+int main() {
+    int m,n,flag=1;
+    scanf("%d %d",&m,&n);
+    int matrix1[m][n];
+    for(int i=0;i<m;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+           scanf("%d", &matrix1[i][j]);
+        }
+    }
+    if(m!=n)
+   { printf("Not a Symmetric Matrix");
+     return 0;
+   }
+for(int i=0;i<m;i++)
+{
+    for(int j=0;j<n;j++)
+    {
+      if( matrix1[i][j]!=matrix1[j][i])
+      flag=0;
+      break;
+    }
+    if(!flag)
+    break;
+}
+if(flag)
+printf("Symmetric Matrix");
+else
+printf("Not a Symmetric Matrix");
+    
+    return 0;
+}
