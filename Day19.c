@@ -16,4 +16,53 @@ Input:
 Output:
 -10 1
 
-Explanation: Among all possible pairs, the sum of -10 and 1 is -9, which is the closest to zero compared to other pairs.*/
+Explanation: Among all possible pairs, the sum of -10 and 1 is -9, which is the closest to zero compared to other pairs.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+void findClosestPair(int arr[], int n) {
+    if (n < 2) {
+        printf("Array must have at least two elements\n");
+        return;
+    }
+    qsort(arr, n, sizeof(int), compare);
+
+    int left = 0, right = n - 1;
+    int minSum = __INT_MAX__;
+    int minLeft = left, minRight = right;
+
+    while (left < right) {
+        int sum = arr[left] + arr[right];
+
+        if (abs(sum) < abs(minSum)) {
+            minSum = sum;
+            minLeft = left;
+            minRight = right;
+        }
+        if (sum < 0)
+            left++;
+        else
+            right--;
+    }
+
+    printf("%d %d\n", arr[minLeft], arr[minRight]);
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    findClosestPair(arr, n);
+
+    return 0;
+}
